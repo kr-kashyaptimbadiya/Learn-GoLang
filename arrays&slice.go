@@ -53,7 +53,7 @@ func main() {
 	//** append Slice
 	slice = append(slice, 4, 5, 6)
 	fmt.Println(slice)
-	
+
 	slice = slice[:0]
 	slice = append(slice, 1, 2, 4, 8, 16, 32)
 	//**Range in Slice give  i = index, v = values
