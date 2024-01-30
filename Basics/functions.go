@@ -18,9 +18,6 @@ func mul(x, y int) int {
 
 // A function can return any number of results.
 func subandswap(x, y int) (int, int, int) {
-	var y1 int
-	y1:=1
-	print(y1)
 	return x - y, y, x
 }
 
