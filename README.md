@@ -9,7 +9,6 @@
 - [Generics]
 - [Methods & Interfaces]
 - [Concurrency]
-- [GO_modules]
 - [GO mod & GO sum]
 - [Leetcode Problems]
 
