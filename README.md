@@ -1,5 +1,5 @@
 
-<h1 align="center"> Go Practice </h1> <br>
+<h1 align="center"> 👉 Learn Go</h1> <br>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
