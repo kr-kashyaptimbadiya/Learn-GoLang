@@ -1,6 +1,0 @@
-go mod init main
-go mod tidy
-go build .
-go run .
-go test
-go get rsc.io/quote //import download 
