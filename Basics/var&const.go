@@ -13,12 +13,12 @@ var cpp, golang = true, "no" //variable take type of initializers cpp - boolean 
 //**z := 6
 
 // ** Constants
-const Pi = 3.14
+const Pi float64 = 3.14
 
 func main() {
 	var i int
 
-	var x = 3
+	var x int = 3
 
 	//Inside a function, the := short assignment statement can be used in place of a var
 	y := 4

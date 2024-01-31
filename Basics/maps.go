@@ -16,19 +16,18 @@ type Ver struct {
 // 	fmt.Println(m["Bell Labs"])
 // }
 
-// var m = map[string]Ver{
-// 	"knackroot": Ver{
-// 		41.11212, -72.312112,
-// 	},
-// 	"Google": Ver{
-// 		37.42202, -122.08408,
-// 	},
-// }
+//	var m = map[string]Ver{
+//		"knackroot": Ver{
+//			41.11212, -72.312112,
+//		},
+//		"Google": Ver{
+//			37.42202, -122.08408,
+//		},
+//	}
 var m = map[string]Ver{
 	"knackroot": {40.68433, -74.39967},
 	"Google":    {37.42202, -122.08408},
 }
-
 
 func main() {
 	fmt.Println(m["knackroot"])
