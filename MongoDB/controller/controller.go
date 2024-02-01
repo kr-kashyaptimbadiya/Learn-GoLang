@@ -6,8 +6,10 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/gorilla/mux"
+	"github.com/joho/godotenv"
 	"github.com/kashyapt/MongoDB/model"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -15,13 +17,17 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-const connectionString = "mongodb+srv://kashyapt:kashyapt@cluster0.mhmlw8t.mongodb.net/?retryWrites=true&w=majority"
 const dbName = "netflix"
 const colName = "watchlist"
 
 var collection *mongo.Collection
 
 func init() {
+	err := godotenv.Load()
+	if err != nil{
+		log.Fatal(".env file couldn't be loaded")
+	}
+	connectionString := os.Getenv("con")
 	clientOptions := options.Client().ApplyURI(connectionString)
 	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
@@ -31,6 +37,14 @@ func init() {
 	collection = client.Database(dbName).Collection(colName)
 	fmt.Println("Collection instance is ready")
 }
+//TODO returns a non-nil, empty Context. Code should use context.TODO when it’s unclear 
+//which Context to use or it is not yet available (because the surrounding function has 
+//not yet been extended to accept a Context parameter).
+
+//BACKGROUND returns a non-nil, empty Context. It is never canceled, has no values, and has no deadline. 
+//It is typically used by the main function, initialization, and tests, and as the top-level Context 
+//for incoming requests.
+
 
 func insertOneMovie(movie model.Netflix) {
 	inserted, err := collection.InsertOne(context.Background(), movie)
