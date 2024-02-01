@@ -24,7 +24,7 @@ var collection *mongo.Collection
 
 func init() {
 	err := godotenv.Load()
-	if err != nil{
+	if err != nil {
 		log.Fatal(".env file couldn't be loaded")
 	}
 	connectionString := os.Getenv("con")
@@ -37,14 +37,18 @@ func init() {
 	collection = client.Database(dbName).Collection(colName)
 	fmt.Println("Collection instance is ready")
 }
-//TODO returns a non-nil, empty Context. Code should use context.TODO when it’s unclear 
-//which Context to use or it is not yet available (because the surrounding function has 
+
+//Context is a built-in package in the Go standard library that provides a powerful toolset for managing
+//concurrent operations. It enables the propagation of cancellation signals, deadlines, and values across
+//goroutines, ensuring that related operations can gracefully terminate when necessary.
+
+//TODO returns a non-nil, empty Context. Code should use context.TODO when it’s unclear
+//which Context to use or it is not yet available (because the surrounding function has
 //not yet been extended to accept a Context parameter).
 
-//BACKGROUND returns a non-nil, empty Context. It is never canceled, has no values, and has no deadline. 
-//It is typically used by the main function, initialization, and tests, and as the top-level Context 
+//BACKGROUND returns a non-nil, empty Context. It is never canceled, has no values, and has no deadline.
+//It is typically used by the main function, initialization, and tests, and as the top-level Context
 //for incoming requests.
-
 
 func insertOneMovie(movie model.Netflix) {
 	inserted, err := collection.InsertOne(context.Background(), movie)
@@ -73,7 +77,7 @@ func updateOneMovie(movieId string) {
 }
 
 func deleteOneMovie(movieId string) {
-	id, _ := primitive.ObjectIDFromHex(movieId)
+	id, _ := primitive.ObjectIDFromHex(movieId) //ObjectIDFromHex creates a new ObjectID from a hex string.
 	filter := bson.M{"_id": id}
 	deleteCount, err := collection.DeleteOne(context.Background(), filter)
 
@@ -113,7 +117,10 @@ func getAllMovies() []primitive.M {
 }
 
 func GetMyAllMovies(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("Content-Type", "application/x-www-form-urlencoded") //Here,the Content-type header information tells the browser,
+	// the type of response it is getting from the server.
+	w.Header().Set("Allow-Control-Allow-Methods", "GET")
+
 	allMovies := getAllMovies()
 	json.NewEncoder(w).Encode(allMovies)
 	//This line encodes the allMovies variable as JSON and writes it to the HTTP response body using the
@@ -148,11 +155,11 @@ func DeleteAMovie(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	deleteOneMovie(params["id"])
 	json.NewEncoder(w).Encode(params["id"])
-	// For example, if you have a route pattern like "/users/{id}" and a request URL "/users/123", 
-	//calling mux.Vars(r) would return a map with one entry where the key is "id" and the value is "123". 
+	// For example, if you have a route pattern like "/users/{id}" and a request URL "/users/123",
+	//calling mux.Vars(r) would return a map with one entry where the key is "id" and the value is "123".
 	//This allows you to access the value of the route variable "id" within your handler function.
 
-	//You can then use params to access the values of route variables and use them in your handler logic 
+	//You can then use params to access the values of route variables and use them in your handler logic
 	//to customize the behavior of your application based on the values provided in the request URL.
 }
 func DeleteAllMovie(w http.ResponseWriter, r *http.Request) {

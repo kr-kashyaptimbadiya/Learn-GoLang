@@ -19,7 +19,7 @@ func (f MYFLOAT) Abs() float64 {
 		return float64(-f)
 	}
 	return float64(f)
-} 
+}
 
 func (v *Vert) Abs() float64 {
 	return math.Sqrt(v.X*v.X + v.Y*v.Y)
@@ -38,6 +38,5 @@ func main() {
 	//a = v
 
 	fmt.Println(a.Abs())
+
 }
-
-
