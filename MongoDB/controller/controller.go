@@ -113,7 +113,7 @@ func getAllMovies() []primitive.M {
 }
 
 func GetMyAllMovies(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Content-Type", "application/json")
 	allMovies := getAllMovies()
 	json.NewEncoder(w).Encode(allMovies)
 	//This line encodes the allMovies variable as JSON and writes it to the HTTP response body using the
@@ -123,7 +123,7 @@ func GetMyAllMovies(w http.ResponseWriter, r *http.Request) {
 }
 
 func CreateMovie(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Allow-Control-Allow-Methods", "POST")
 
 	var movie model.Netflix
@@ -134,7 +134,7 @@ func CreateMovie(w http.ResponseWriter, r *http.Request) {
 }
 
 func MarkAsWatched(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Allow-Control-Allow-Methods", "PUT")
 
 	params := mux.Vars(r)
@@ -143,7 +143,7 @@ func MarkAsWatched(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteAMovie(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Allow-Control-Allow-Methods", "DELETE")
 	params := mux.Vars(r)
 	deleteOneMovie(params["id"])
@@ -156,7 +156,7 @@ func DeleteAMovie(w http.ResponseWriter, r *http.Request) {
 	//to customize the behavior of your application based on the values provided in the request URL.
 }
 func DeleteAllMovie(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/x-www-form-urlencode")
+	w.Header().Set("Content-Type", "application/json")
 	w.Header().Set("Allow-Control-Allow-Methods", "DELETE")
 
 	count := deleteAllMovie()
